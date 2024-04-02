@@ -11,7 +11,7 @@ def best_first_search(start_city, cities, distances):
         c, current_city, path = heapq.heappop(pq)
         print("Current city:", current_city)
         print("Path:", path)
-        
+        pq=[ ]
         if len(path) == num_cities:
             new_path = path + [cities[0]]
             i=cities.index(path[-1])
@@ -19,14 +19,14 @@ def best_first_search(start_city, cities, distances):
             c=c+distances[i][0]
             return new_path,c
         
-        visited.add(tuple(path))
+        # visited.add(tuple(path))
         
         for next_city in [x for x in cities if x not in path]:
             # if next_city not in visited:
             new_path = path + [next_city]
-            if tuple(new_path) not in visited:
-                cost = c+distances[cities.index(current_city)][cities.index(next_city)]
-                heapq.heappush(pq, (cost, next_city, new_path))
+            # if tuple(new_path) not in visited:
+            cost = c+distances[cities.index(current_city)][cities.index(next_city)]
+            heapq.heappush(pq, (cost, next_city, new_path))
     
     return None,0
 
